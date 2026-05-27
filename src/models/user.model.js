@@ -2,7 +2,7 @@ const mongoose=require("mongoose")
 const bcrypt=require("bcryptjs")
 
 //userschema with 3 properties.
-const userSchema=mongoose.Schema({
+const userSchema= new mongoose.Schema({
     email:{
         type:String,
         required:[true,"Email is required for creating a user"],
@@ -30,5 +30,16 @@ const userSchema=mongoose.Schema({
 //whenever you save datato the schema then this function runs->hashing done which is one way can convert plain text to hashed password but not vice versa
 userSchema.pre("save",async function(next)
 {
+    if(!this,isModified("password"))
+    {
+        return next()
+    }
+    const hash=await bcrypt.hash(this.password,10)
+    this.password=hash
+    return next()
 
 })
+
+
+userSchema.method.compare
+
