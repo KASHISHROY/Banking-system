@@ -1,4 +1,5 @@
 const express=require("express")
+const cookieParser=require("cookie-parser")
 
 const authRouter=require("./routes/auth.routes")
 
@@ -6,7 +7,7 @@ const authRouter=require("./routes/auth.routes")
 const app=express()
 
 app.use(express.json())  //to read the body of request
-
+app.use(cookieParser())
 app.use("/api/auth",authRouter) //all the reqstarting from /api/auth will be handled by authRouter
 
 

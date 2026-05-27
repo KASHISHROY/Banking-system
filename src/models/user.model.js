@@ -30,7 +30,7 @@ const userSchema= new mongoose.Schema({
 //whenever you save datato the schema then this function runs->hashing done which is one way can convert plain text to hashed password but not vice versa
 userSchema.pre("save",async function(next)
 {
-    if(!this,isModified("password"))
+    if(!this.isModified("password"))
     {
         return next()
     }
@@ -41,7 +41,7 @@ userSchema.pre("save",async function(next)
 })
 
 //if password matches return true
-userSchema.method.comparePassword=async function(password){
+userSchema.methods.comparePassword=async function(password){
         return await bcrypt.compare(password,this.password)
 }
 
