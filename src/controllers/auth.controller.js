@@ -1,4 +1,4 @@
-const usermodel= require("../models/user.model")
+const userModel= require("../models/user.model")
 const jwt=require("jsonwebtoken")
 
 
@@ -8,7 +8,7 @@ async function userRegisterController(req,res)
 {
     const {email,password,name}= req.body
 
-    const isExists=await usermodel.findOne({
+    const isExists=await userModel.findOne({
         email:email
     })
     if(isExists)
@@ -19,7 +19,7 @@ async function userRegisterController(req,res)
         })
     }
 
-    const user=await usermodel.create({
+    const user=await userModel.create({
         email,password,name
     })
 
@@ -46,7 +46,7 @@ async function userRegisterController(req,res)
 async function userLoginController(req,res)
 {
     const {email,password}=req.body
-    const user=await userModel.findOne({email})
+    const user=await userModel.findOne({email}).select("+password")
 
     if(!user)
     {
