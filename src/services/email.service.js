@@ -46,8 +46,21 @@ const sendEmail = async (to, subject, text, html) => {
 
 
 
+async function sendRegistrationEmail(userEmail, name) {
+  const subject = 'Welcome to Backend Ledger!';
 
+  const text =
+    `Hello ${name},\n\n` +
+    `Thank you for registering at Backend Ledger.`;
 
+  const html =
+    `<p>Hello ${name},</p>` +
+    `<p>Thank you for registering at Backend Ledger.</p>`;
 
-module.exports = sendEmail;
+  await sendEmail(userEmail, subject, text, html);
+}
+
+module.exports = {
+  sendRegistrationEmail
+};
 
