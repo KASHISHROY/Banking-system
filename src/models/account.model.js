@@ -1,14 +1,15 @@
 const mongoose=require("mongoose")
 
 const accountSchema= new mongoose.Schema({
-    userId:{
+    user:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"user",
-        required:[ true,"Account must be associated with a user" ]
+        required:[ true,"Account must be associated with a user" ],
+        index=true
     },
     status:{
+        type:String,
         enum:{
-            type:String,
             values:["ACTIVE","FROZEN","CLOSED"],
             message:"Status can be either ACTIVE,FROZEN or CLOSED"
         }
